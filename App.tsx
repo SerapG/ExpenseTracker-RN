@@ -1,11 +1,15 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+
+import RootNavigator from './src/navigation'
 
 function App(): React.JSX.Element {
   return (
-    <View style={{ flex: 1 }}>
-      <Text style={{ fontSize: 36 }}>IMPLEMENT ME</Text>
-    </View>
+    <SafeAreaProvider>
+        <RootNavigator/>
+    </SafeAreaProvider>
+    
   );
 }
 

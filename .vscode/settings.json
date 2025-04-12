@@ -6,7 +6,7 @@
   "editor.insertSpaces": true,
   "editor.codeActionsOnSave": {
     "source.addMissingImports.ts": "never",
-    "source.fixAll.eslint": "never",
+    "source.fixAll.eslint": "always",
     "source.organizeImports": "never",
     "source.sortImports": "never",
     "source.removeUnused.ts": "never",
@@ -20,9 +20,9 @@
     "tree.inactiveIndentGuidesStroke": "#efef05"
   },
   "files.exclude": {
-    "**/ios": false,
+    "**/ios": true,
     "**/android": false,
-    "**/node_modules": true,
+    "**/node_modules": false,
     "**/yarn.lock": true,
     "**/package-lock.json": true,
     "**/Gemfile": true,
@@ -39,7 +39,10 @@
     "**/.gitignore": true,
     "**/app.json": true,
     "index.d.ts": true,
-    "index.js": true
+    "index.js": true,
+    "gesture-handler.native.js":true,
+    ".yarnrc.yml":true,
+    "eslint.config.mjs":true,
   },
   "files.watcherExclude": {
     "**/.git/objects/**": true,

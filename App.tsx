@@ -1,12 +1,13 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import StackNavigator from './src/navigation/StackNavigator';
 
-function App(): React.JSX.Element {
+const App = () => {
   return (
-    <View style={{ flex: 1 }}>
-      <Text style={{ fontSize: 36 }}>IMPLEMENT ME</Text>
-    </View>
+    <NavigationContainer>
+      <StackNavigator />
+    </NavigationContainer>
   );
-}
+};
 
 export default App;

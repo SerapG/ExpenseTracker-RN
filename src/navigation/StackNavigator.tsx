@@ -8,9 +8,9 @@ import CategoryDetailScreen from '../screens/categoryDetail/CategoryDetailScreen
 import type { Expense } from '../data/expenses';
 
 export type RootStackParamList = {
-  Home: { newExpense?: Expense } | undefined;
+  Home: { newExpense?: Expense; deletedExpenseId?: string } | undefined;
   AddExpense: undefined;
-  ExpenseDetail: undefined;
+  ExpenseDetail: {expense: Expense};
   Category: undefined;
   CategoryDetail: { category: string };
 };

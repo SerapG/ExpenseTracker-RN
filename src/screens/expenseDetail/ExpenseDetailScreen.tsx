@@ -23,6 +23,9 @@ const ExpenseDetailScreen = () => {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.label}>Kategori:</Text>
+      <Text style={styles.value}>{expense.category}</Text>
+
       <Text style={styles.label}>Gider Başlığı:</Text>
       <Text style={styles.value}>{expense.title}</Text>
 
@@ -31,9 +34,6 @@ const ExpenseDetailScreen = () => {
 
       <Text style={styles.label}>Tarih:</Text>
       <Text style={styles.value}>{expense.date}</Text>
-
-      <Text style={styles.label}>Kategori:</Text>
-      <Text style={styles.value}>{expense.category}</Text>
 
       <View style={{ marginTop: 20 }}>
         <Button title="Gideri Sil" color="#ff4d4d" onPress={handleDelete} />

@@ -1,32 +1,33 @@
+// src/components/AddButton.tsx
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 
-type DeleteButtonProps = {
+type Props = {
+  title: string;
   onPress: () => void;
 };
 
-const DeleteButton = ({ onPress }: DeleteButtonProps) => {
+const AddButton = ({ title, onPress }: Props) => {
   return (
     <TouchableOpacity style={styles.button} onPress={onPress}>
-      <Text style={styles.text}>🗑️</Text>
+      <Text style={styles.text}>{title}</Text>
     </TouchableOpacity>
   );
 };
 
-export default DeleteButton;
+export default AddButton;
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: '#ff4d4d',
-    paddingVertical: 4,
-    paddingHorizontal: 8,
-    borderRadius: 6,
+    backgroundColor: '#28a745',
+    paddingVertical: 10,
+    paddingHorizontal: 16,
+    borderRadius: 8,
     justifyContent: 'center',
     alignItems: 'center',
   },
   text: {
-    color: 'white',
+    color: '#fff',
     fontWeight: 'bold',
-    fontSize: 14,
   },
 });

@@ -8,7 +8,7 @@ type DeleteButtonProps = {
 const DeleteButton = ({ onPress }: DeleteButtonProps) => {
   return (
     <TouchableOpacity style={styles.button} onPress={onPress}>
-      <Text style={styles.text}>Sil</Text>
+      <Text style={styles.text}>🗑️</Text>
     </TouchableOpacity>
   );
 };
@@ -17,16 +17,16 @@ export default DeleteButton;
 
 const styles = StyleSheet.create({
   button: {
-    padding: 6,
-    borderRadius: 4,
     backgroundColor: '#ff4d4d',
+    paddingVertical: 4,
+    paddingHorizontal: 8,
+    borderRadius: 6,
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: 10,
   },
   text: {
     color: 'white',
-    fontSize: 12,
     fontWeight: 'bold',
+    fontSize: 14,
   },
 });

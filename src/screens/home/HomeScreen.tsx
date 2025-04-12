@@ -47,6 +47,8 @@ const Home = () => {
         title="Harcama Ekle"
         onPress={() => navigation.navigate('AddExpense')}
       />
+      <Button title="Kategoriler" onPress={() => navigation.navigate('Category')} />
+
 
       {Object.keys(groupedExpenses).map((category) => (
         <View key={category} style={styles.categoryGroup}>

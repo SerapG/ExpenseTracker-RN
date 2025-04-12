@@ -31,7 +31,7 @@ const CategoryScreen = () => {
   };
 
   const handleCategoryPress = (category: string) => {
-    navigation.navigate('CategoryDetail', { category }); 
+    navigation.navigate('CategoryDetail', { category }); // bu ekranı sonra oluşturacağız
   };
 
   return (

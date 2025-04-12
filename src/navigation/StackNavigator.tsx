@@ -1,13 +1,11 @@
-import type { Expense } from '../data/expenses';
-
-
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import HomeScreen from '../screens/home/HomeScreen';
-import AddExpenseScreen from '../screens/addExpense/AddExpenseScreen';
+import Home from '../screens/home/HomeScreen';
+import AddExpense from '../screens/addExpense/AddExpenseScreen';
 import ExpenseDetailScreen from '../screens/expenseDetail/ExpenseDetailScreen';
 import CategoryScreen from '../screens/category/CategoryScreen';
 import CategoryDetailScreen from '../screens/categoryDetail/CategoryDetailScreen';
+import type { Expense } from '../data/expenses';
 
 export type RootStackParamList = {
   Home: { newExpense?: Expense } | undefined;
@@ -22,8 +20,8 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 const StackNavigator = () => {
   return (
     <Stack.Navigator initialRouteName="Home">
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="AddExpense" component={AddExpenseScreen} />
+      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="AddExpense" component={AddExpense} />
       <Stack.Screen name="ExpenseDetail" component={ExpenseDetailScreen} />
       <Stack.Screen name="Category" component={CategoryScreen} />
       <Stack.Screen name="CategoryDetail" component={CategoryDetailScreen} />
@@ -32,4 +30,3 @@ const StackNavigator = () => {
 };
 
 export default StackNavigator;
-

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 
-const ExpenceDetail = () => {
+const ExpenseDetail = () => {
   return (
     <View>
       <Text>Harcama Detayları</Text>
@@ -9,4 +9,4 @@ const ExpenceDetail = () => {
   );
 };
 
-export default ExpenceDetail;
+export default ExpenseDetail;

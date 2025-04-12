@@ -1,14 +1,12 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React from 'react';
+import { View, Text } from 'react-native';
 
-const ExpenseDetail = () => {
+const ExpenceDetail = () => {
   return (
-    <View style={{ flex: 1 }}>
-      <Text>ExpenseDetail</Text>
+    <View>
+      <Text>Harcama Detayları</Text>
     </View>
-  )
-}
+  );
+};
 
-export default ExpenseDetail
-
-const styles = StyleSheet.create({})
+export default ExpenceDetail;

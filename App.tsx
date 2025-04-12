@@ -1,16 +1,13 @@
 import React from 'react';
-import { View, Text } from 'react-native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { NavigationContainer } from '@react-navigation/native';
+import StackNavigator from './src/navigation/StackNavigator';
 
-import RootNavigator from './src/navigation'
-
-function App(): React.JSX.Element {
+const App = () => {
   return (
-    <SafeAreaProvider>
-        <RootNavigator/>
-    </SafeAreaProvider>
-    
+    <NavigationContainer>
+      <StackNavigator />
+    </NavigationContainer>
   );
-}
+};
 
 export default App;

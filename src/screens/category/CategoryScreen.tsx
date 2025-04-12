@@ -1,14 +1,12 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React from 'react';
+import { View, Text } from 'react-native';
 
-const CategoryScreen = () => {
+const Category = () => {
   return (
-    <View style={{ flex: 1 }}>
-      <Text>CategoryScreen</Text>
+    <View>
+      <Text>Kategori</Text>
     </View>
-  )
-}
+  );
+};
 
-export default CategoryScreen
-
-const styles = StyleSheet.create({})
+export default Category;

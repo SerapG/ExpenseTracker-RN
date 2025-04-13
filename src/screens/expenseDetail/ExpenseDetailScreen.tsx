@@ -1,43 +1,50 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button, Alert } from 'react-native';
+import { View, Text, StyleSheet, Alert, TouchableOpacity } from 'react-native';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import type { RootStackParamList } from '../../navigation/StackNavigator';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+import colors from '../../theme/colors';
+import spacing from '../../theme/spacing';
+import typography from '../../theme/typography';
 
 const ExpenseDetailScreen = () => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const route = useRoute<RouteProp<RootStackParamList, 'ExpenseDetail'>>();
   const { expense } = route.params;
 
+  // Harcamayı silmeden önce kullanıcıdan onay al
   const handleDelete = () => {
-    Alert.alert('Onay', 'Bu harcamayı silmek istiyor musun?', [
-      { text: 'Vazgeç' },
+    Alert.alert('Confirm', 'Do you really want to delete this expense?', [
+      { text: 'Cancel', style: 'cancel' },
       {
-        text: 'Evet',
+        text: 'Yes',
         onPress: () => {
+          // Ana ekrana silinen harcamanın id'si ile dön
           navigation.navigate('Home', { deletedExpenseId: expense.id });
         },
+        style: 'destructive',
       },
     ]);
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>Kategori:</Text>
+      <Text style={styles.label}>Category</Text>
       <Text style={styles.value}>{expense.category}</Text>
 
-      <Text style={styles.label}>Gider Başlığı:</Text>
+      <Text style={styles.label}>Title</Text>
       <Text style={styles.value}>{expense.title}</Text>
 
-      <Text style={styles.label}>Tutar:</Text>
+      <Text style={styles.label}>Amount</Text>
       <Text style={styles.value}>{expense.amount} TL</Text>
 
-      <Text style={styles.label}>Tarih:</Text>
+      <Text style={styles.label}>Date</Text>
       <Text style={styles.value}>{expense.date}</Text>
 
-      <View style={{ marginTop: 20 }}>
-        <Button title="Gideri Sil" color="#ff4d4d" onPress={handleDelete} />
-      </View>
+      <TouchableOpacity style={styles.deleteButton} onPress={handleDelete}>
+        <Text style={styles.deleteButtonText}>Delete Expense</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -46,14 +53,31 @@ export default ExpenseDetailScreen;
 
 const styles = StyleSheet.create({
   container: {
-    padding: 16,
+    padding: spacing.md,
+    flex: 1,
+    backgroundColor: colors.background,
   },
   label: {
-    fontWeight: 'bold',
-    marginTop: 12,
+    ...typography.subheading,
+    marginTop: spacing.sm,
+    marginBottom: spacing.xs,
+    color: colors.titletext,
   },
   value: {
-    fontSize: 16,
-    marginTop: 4,
+    ...typography.body,
+    color: colors.danger,
+    marginBottom: spacing.sm,
+  },
+  deleteButton: {
+    backgroundColor: colors.danger,
+    paddingVertical: spacing.sm,
+    paddingHorizontal: spacing.lg,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginTop: spacing.xl,
+  },
+  deleteButtonText: {
+    ...typography.subheading,
+    color: colors.white,
   },
 });

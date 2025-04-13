@@ -6,7 +6,6 @@ import type { RootStackParamList } from '../../navigation/StackNavigator';
 
 import { dummyExpenses, Expense } from '../../data/expenses';
 import ExpenseGroup from '../../components/ExpenseGroup';
-import EmptyMessage from '../../components/EmptyMessage';
 
 const Home = () => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
@@ -15,23 +14,20 @@ const Home = () => {
   const [expenses, setExpenses] = useState<Expense[]>(dummyExpenses);
 
   useEffect(() => {
-  const newExpense = route.params?.newExpense;
-
-  if (newExpense) {
-    setExpenses((prev) => [newExpense, ...prev]);
-    navigation.setParams({ newExpense: undefined }); // opsiyonel: tekrar eklemesini engeller
-  }
-}, [route.params?.newExpense]);
-
+    const newExpense = route.params?.newExpense;
+    if (newExpense) {
+      setExpenses((prev) => [newExpense, ...prev]);
+      navigation.setParams({ newExpense: undefined });
+    }
+  }, [route.params?.newExpense]);
 
   useEffect(() => {
-  const deletedId = route.params?.deletedExpenseId;
-
-  if (deletedId) {
-    setExpenses((prev) => prev.filter((e) => e.id !== deletedId));
-    navigation.setParams({ deletedExpenseId: undefined });
-  }
-}, [route.params?.deletedExpenseId]);
+    const deletedId = route.params?.deletedExpenseId;
+    if (deletedId) {
+      setExpenses((prev) => prev.filter((e) => e.id !== deletedId));
+      navigation.setParams({ deletedExpenseId: undefined });
+    }
+  }, [route.params?.deletedExpenseId]);
 
   const handleDelete = (id: string) => {
     setExpenses((prev) => prev.filter((expense) => expense.id !== id));
@@ -52,19 +48,15 @@ const Home = () => {
       <Button title="Harcama Ekle" onPress={() => navigation.navigate('AddExpense')} />
       <Button title="Kategoriler" onPress={() => navigation.navigate('Category')} />
 
-      {expenses.length === 0 ? (
-        <EmptyMessage message="Henüz eklenmiş bir gider bulunmamaktadır." />
-      ) : (
-        Object.keys(groupedExpenses).map((category) => (
-          <ExpenseGroup
-            key={category}
-            category={category}
-            expenses={groupedExpenses[category]}
-            onPressItem={handleItemPress}
-            onDeleteItem={handleDelete}
-          />
-        ))
-      )}
+      {Object.keys(groupedExpenses).map((category) => (
+        <ExpenseGroup
+          key={category}
+          category={category}
+          expenses={groupedExpenses[category]}
+          onPressItem={handleItemPress}
+          onDeleteItem={handleDelete}
+        />
+      ))}
     </View>
   );
 };
@@ -74,5 +66,6 @@ export default Home;
 const styles = StyleSheet.create({
   container: {
     padding: 16,
+    flex: 1,
   },
 });

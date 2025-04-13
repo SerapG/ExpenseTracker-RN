@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { View, Button, StyleSheet } from 'react-native';
+import { View, StyleSheet,ScrollView } from 'react-native';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '../../navigation/StackNavigator';
 
 import { dummyExpenses, Expense } from '../../data/expenses';
 import ExpenseGroup from '../../components/ExpenseGroup';
+import AddButton from '../../components/AddButton';
+
+
+import colors from '../../theme/colors';
+import spacing from '../../theme/spacing';
 
 const Home = () => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
@@ -44,9 +49,12 @@ const Home = () => {
   }, {});
 
   return (
-    <View style={styles.container}>
-      <Button title="Harcama Ekle" onPress={() => navigation.navigate('AddExpense')} />
-      <Button title="Kategoriler" onPress={() => navigation.navigate('Category')} />
+    <ScrollView style={styles.container} contentContainerStyle={{paddingBottom:100}}>
+      <View style={styles.buttonGroup}>
+        <AddButton title="ADD EXPENSE" onPress={() => navigation.navigate('AddExpense')} />
+        <AddButton title="CATEGORIES" onPress={() => navigation.navigate('Category')} />
+
+      </View>
 
       {Object.keys(groupedExpenses).map((category) => (
         <ExpenseGroup
@@ -57,7 +65,7 @@ const Home = () => {
           onDeleteItem={handleDelete}
         />
       ))}
-    </View>
+    </ScrollView>
   );
 };
 
@@ -65,7 +73,12 @@ export default Home;
 
 const styles = StyleSheet.create({
   container: {
-    padding: 16,
+    padding: spacing.md,
     flex: 1,
+    backgroundColor: colors.background,
+  },
+  buttonGroup: {
+    gap: spacing.sm,
+    marginBottom: spacing.md,
   },
 });

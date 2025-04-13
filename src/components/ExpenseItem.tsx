@@ -1,8 +1,13 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import DeleteButton from './DeleteButton';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { useWindowDimensions } from 'react-native';
 
-type ExpenseItemProps = {
+import DeleteButton from './DeleteButton';
+import colors from '../theme/colors';
+import spacing from '../theme/spacing';
+import typography from '../theme/typography';
+
+type Props = {
   title: string;
   amount: number;
   date: string;
@@ -10,41 +15,55 @@ type ExpenseItemProps = {
   onDelete: () => void;
 };
 
-const ExpenseItem = ({ title, amount, date, onPress, onDelete }: ExpenseItemProps) => {
+const ExpenseItem = ({ title, amount, date, onPress, onDelete }: Props) => {
+  const { width } = useWindowDimensions();
+  const isSmallScreen = width < 360;
+
   return (
-    <View style={styles.expenseItem}>
-      <TouchableOpacity style={styles.expenseInfo} onPress={onPress}>
-        <Text style={styles.expenseTitle}>{title}</Text>
-        <Text style={styles.expenseDetail}>
-          {amount} TL - {date}
-        </Text>
-      </TouchableOpacity>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
+      <View style={styles.textGroup}>
+        <Text style={[styles.title, isSmallScreen && styles.smallTitle]}>{title}</Text>
+        <Text style={styles.amount}>{amount} TL</Text>
+        <Text style={styles.date}>{date}</Text>
+      </View>
       <DeleteButton onPress={onDelete} />
-    </View>
+    </TouchableOpacity>
   );
 };
 
 export default ExpenseItem;
 
 const styles = StyleSheet.create({
-  expenseItem: {
+  container: {
+    backgroundColor: colors.cardbackground,
+    padding: spacing.md,
+    borderRadius: 8,
+    marginBottom: spacing.sm,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#f1f1f1',
-    padding: 10,
-    borderRadius: 8,
-    marginBottom: 8,
+    shadowColor: '#000',
+    shadowOpacity: 0.08,
+    shadowRadius: 6,
+    elevation: 2,
   },
-  expenseInfo: {
+  textGroup: {
     flex: 1,
   },
-  expenseTitle: {
-    fontSize: 16,
-    fontWeight: '600',
+  title: {
+    ...typography.heading,
+    color: colors.text,
+    marginBottom: spacing.xs,
   },
-  expenseDetail: {
-    fontSize: 14,
-    color: '#555',
+  smallTitle: {
+    fontSize: 16,
+  },
+  amount: {
+    ...typography.body,
+    color: colors.primary,
+  },
+  date: {
+    ...typography.small,
+    color: colors.mutedText,
   },
 });

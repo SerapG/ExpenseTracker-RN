@@ -8,7 +8,7 @@ type DeleteButtonProps = {
 const DeleteButton = ({ onPress }: DeleteButtonProps) => {
   return (
     <TouchableOpacity style={styles.button} onPress={onPress}>
-      <Text style={styles.text}>Sil</Text>
+      <Text style={styles.text}>Delete</Text>
     </TouchableOpacity>
   );
 };

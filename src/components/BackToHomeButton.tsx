@@ -1,23 +1,36 @@
 import React from 'react';
-import { Button, StyleSheet, View } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '../navigation/StackNavigator';
+
+import colors from '../theme/colors';
+import spacing from '../theme/spacing';
+import typography from '../theme/typography';
 
 const BackToHomeButton = () => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   return (
-    <View style={styles.container}>
-      <Button title="Ana Sayfaya Dön" onPress={() => navigation.navigate('Home')} />
-    </View>
+    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Home')}>
+      <Text style={styles.text}>Home Screen</Text>
+    </TouchableOpacity>
   );
 };
 
 export default BackToHomeButton;
 
 const styles = StyleSheet.create({
-  container: {
-    marginTop: 20,
+  button: {
+    backgroundColor: colors.primary,
+    paddingVertical: spacing.sm,
+    paddingHorizontal: spacing.lg,
+    borderRadius: 10,
+    marginTop: spacing.lg,
+    alignItems: 'center',
+  },
+  text: {
+    ...typography.subheading,
+    color: colors.titletext,
   },
 });

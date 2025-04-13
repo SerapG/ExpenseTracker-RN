@@ -1,90 +1,121 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  ScrollView,
+  Alert,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '../../navigation/StackNavigator';
 
+import AddButton from '../../components/AddButton';
+import BackToHomeButton from '../../components/BackToHomeButton';
+
+import colors from '../../theme/colors';
+import spacing from '../../theme/spacing';
+import typography from '../../theme/typography';
+
 const AddExpenseScreen = () => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
-  const [title, setTitle] = useState('');
-  const [amount, setAmount] = useState('');
-  const [date, setDate] = useState('');
-  const [category, setCategory] = useState('');
+  const [form, setForm] = useState({
+    title: '',
+    amount: '',
+    date: '',
+    category: '',
+  });
+
+  const handleChange = (key: string, value: string) => {
+    setForm({ ...form, [key]: value });
+  };
 
   const handleSubmit = () => {
-    if (!title || !amount || !date || !category) {
-      Alert.alert('Tüm alanları doldurun!');
+    if (!form.title || !form.amount || !form.date || !form.category) {
+      Alert.alert('Warning', 'Please fill in all fields!');
       return;
     }
 
     const newExpense = {
-      id: Date.now().toString(), // Şimdilik bu kalsın
-      title,
-      amount: parseFloat(amount),
-      date,
-      category,
+      id: Date.now().toString(),
+      title: form.title,
+      amount: parseFloat(form.amount),
+      date: form.date,
+      category: form.category,
     };
 
     navigation.navigate('Home', { newExpense });
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.label}>Kategori</Text>
+    <ScrollView contentContainerStyle={styles.scrollContainer}>
+      <Text style={styles.label}>Category</Text>
       <TextInput
         style={styles.input}
-        value={category}
-        onChangeText={setCategory}
-        placeholder="Örn: Market, Fatura"
+        placeholder="Type category"
+        value={form.category}
+        onChangeText={(value) => handleChange('category', value)}
       />
 
-      <Text style={styles.label}>Gider Başlığı</Text>
+      <Text style={styles.label}>Expense Header</Text>
       <TextInput
         style={styles.input}
-        value={title}
-        onChangeText={setTitle}
-        placeholder="Örn: Elektrik Faturası"
+        placeholder="Add Title"
+        value={form.title}
+        onChangeText={(value) => handleChange('title', value)}
       />
 
-      <Text style={styles.label}>Tutar (₺)</Text>
+      <Text style={styles.label}>Amount</Text>
       <TextInput
         style={styles.input}
-        value={amount}
-        onChangeText={setAmount}
+        placeholder="Add Amount"
+        value={form.amount}
         keyboardType="numeric"
-        placeholder="Örn: 200"
+        onChangeText={(value) => handleChange('amount', value)}
       />
 
-      <Text style={styles.label}>Tarih</Text>
+      <Text style={styles.label}>Date</Text>
       <TextInput
         style={styles.input}
-        value={date}
-        onChangeText={setDate}
         placeholder="YYYY-MM-DD"
+        value={form.date}
+        onChangeText={(value) => handleChange('date', value)}
       />
 
-      <Button title="Gideri Kaydet" onPress={handleSubmit} />
-    </View>
+      <View style={styles.buttonGroup}>
+        <AddButton title="Save" onPress={handleSubmit} />
+        <BackToHomeButton />
+      </View>
+    </ScrollView>
   );
 };
 
 export default AddExpenseScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 16,
+  scrollContainer: {
+    padding: spacing.md,
+    paddingBottom: spacing.xl,
+    backgroundColor: colors.background,
+    flexGrow: 1,
   },
   label: {
-    marginTop: 12,
-    fontWeight: 'bold',
-    fontSize: 14,
+    ...typography.subheading,
+    marginBottom: spacing.xs,
+    color:colors.titletext
   },
   input: {
     borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 6,
-    padding: 8,
-    marginTop: 4,
+    borderColor: colors.border,
+    borderRadius: 8,
+    padding: spacing.sm,
+    marginBottom: spacing.md,
+    backgroundColor: colors.white,
+  },
+  buttonGroup: {
+    marginTop: spacing.lg,
+    gap: spacing.md,
   },
 });

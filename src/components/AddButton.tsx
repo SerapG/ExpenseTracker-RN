@@ -1,6 +1,8 @@
-// src/components/AddButton.tsx
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import colors from '../theme/colors';
+import spacing from '../theme/spacing';
+import typography from '../theme/typography';
 
 type Props = {
   title: string;
@@ -19,15 +21,15 @@ export default AddButton;
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: '#28a745',
-    paddingVertical: 10,
-    paddingHorizontal: 16,
-    borderRadius: 8,
-    justifyContent: 'center',
+    backgroundColor: colors.secondary,
+    paddingVertical: spacing.sm,
+    paddingHorizontal: spacing.lg,
+    borderRadius: 10,
     alignItems: 'center',
+    justifyContent: 'center',
   },
   text: {
-    color: '#fff',
-    fontWeight: 'bold',
+    ...typography.subheading,
+    color: colors.titletext,
   },
 });

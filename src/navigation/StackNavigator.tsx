@@ -7,6 +7,8 @@ import CategoryScreen from '../screens/category/CategoryScreen';
 import CategoryDetailScreen from '../screens/categoryDetail/CategoryDetailScreen';
 import type { Expense } from '../data/expenses';
 
+
+// Tüm ekranların navigation parametrelerini tanımlar
 export type RootStackParamList = {
   Home: { newExpense?: Expense; deletedExpenseId?: string } | undefined;
   AddExpense: undefined;

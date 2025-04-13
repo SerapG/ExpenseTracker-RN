@@ -17,9 +17,9 @@ type Props = {
 
 const ExpenseItem = ({ title, amount, date, onPress, onDelete }: Props) => {
   const { width } = useWindowDimensions();
-  const isSmallScreen = width < 360;
-
+  const isSmallScreen = width < 360;  // küçük ekranlarda yazı boyutunu küçültmek için
   return (
+    // Bileşenin tamamı dokunulabilir: detay sayfasına yönlendirir
     <TouchableOpacity style={styles.container} onPress={onPress}>
       <View style={styles.textGroup}>
         <Text style={[styles.title, isSmallScreen && styles.smallTitle]}>{title}</Text>

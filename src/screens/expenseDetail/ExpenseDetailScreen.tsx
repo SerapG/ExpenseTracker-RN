@@ -13,12 +13,14 @@ const ExpenseDetailScreen = () => {
   const route = useRoute<RouteProp<RootStackParamList, 'ExpenseDetail'>>();
   const { expense } = route.params;
 
+  // Harcamayı silmeden önce kullanıcıdan onay al
   const handleDelete = () => {
     Alert.alert('Confirm', 'Do you really want to delete this expense?', [
       { text: 'Cancel', style: 'cancel' },
       {
         text: 'Yes',
         onPress: () => {
+          // Ana ekrana silinen harcamanın id'si ile dön
           navigation.navigate('Home', { deletedExpenseId: expense.id });
         },
         style: 'destructive',

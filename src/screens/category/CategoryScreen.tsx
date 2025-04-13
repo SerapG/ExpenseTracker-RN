@@ -97,6 +97,7 @@ const styles = StyleSheet.create({
     padding: spacing.sm,
     borderRadius: 8,
     backgroundColor: colors.white,
+    color:colors.brown
   },
   subheading: {
     ...typography.heading,
@@ -115,5 +116,6 @@ const styles = StyleSheet.create({
   },
   itemText: {
     ...typography.body,
+    color:colors.titletext,
   },
 });

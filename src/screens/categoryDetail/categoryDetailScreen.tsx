@@ -4,6 +4,10 @@ import { useRoute, RouteProp } from '@react-navigation/native';
 import type { RootStackParamList } from '../../navigation/StackNavigator';
 import { dummyExpenses } from '../../data/expenses';
 
+import BackToHomeButton from '../../components/BackToHomeButton';
+import colors from '../../theme/colors';
+
+
 const CategoryDetailScreen = () => {
   const route = useRoute<RouteProp<RootStackParamList, 'CategoryDetail'>>();
   const { category } = route.params;
@@ -32,6 +36,9 @@ const CategoryDetailScreen = () => {
           )}
         />
       )}
+
+      <BackToHomeButton />
+
     </View>
   );
 };
@@ -46,6 +53,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 12,
+    color:colors.titletext,
   },
   expenseItem: {
     backgroundColor: '#f1f1f1',
@@ -56,10 +64,11 @@ const styles = StyleSheet.create({
   expenseTitle: {
     fontSize: 16,
     fontWeight: '600',
+    color:colors.brown,
   },
   expenseDetail: {
     fontSize: 14,
-    color: '#555',
+    color: colors.danger,
   },
   emptyText: {
     marginTop: 20,

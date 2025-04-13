@@ -1,7 +1,10 @@
 import React from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import ExpenseItem from './ExpenseItem';
 import { Expense } from '../data/expenses';
+import colors from '../theme/colors';
+import spacing from '../theme/spacing';
+import typography from '../theme/typography';
 
 type Props = {
   category: string;
@@ -12,21 +15,16 @@ type Props = {
 
 const ExpenseGroup = ({ category, expenses, onPressItem, onDeleteItem }: Props) => {
   return (
-    <View style={styles.group}>
-      <Text style={styles.categoryTitle}>{category}</Text>
-      <FlatList
-        data={expenses}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <ExpenseItem
-            title={item.title}
-            amount={item.amount}
-            date={item.date}
-            onPress={() => onPressItem(item)}
-            onDelete={() => onDeleteItem(item.id)}
-          />
-        )}
-      />
+    <View style={styles.container}>
+      <Text style={styles.title}>{category}</Text>
+      {expenses.map((expense) => (
+        <ExpenseItem
+          key={expense.id}
+          {...expense}
+          onPress={() => onPressItem(expense)}
+          onDelete={() => onDeleteItem(expense.id)}
+        />
+      ))}
     </View>
   );
 };
@@ -34,12 +32,12 @@ const ExpenseGroup = ({ category, expenses, onPressItem, onDeleteItem }: Props) 
 export default ExpenseGroup;
 
 const styles = StyleSheet.create({
-  group: {
-    marginTop: 16,
+  container: {
+    marginBottom: spacing.lg,
   },
-  categoryTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 8,
+  title: {
+    ...typography.heading,
+    marginBottom: spacing.sm,
+    color: colors.titletext,
   },
 });

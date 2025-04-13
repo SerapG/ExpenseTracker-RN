@@ -59,11 +59,11 @@ const styles = StyleSheet.create({
     ...typography.subheading,
     marginTop: spacing.sm,
     marginBottom: spacing.xs,
-    color: colors.text,
+    color: colors.titletext,
   },
   value: {
     ...typography.body,
-    color: colors.text,
+    color: colors.danger,
     marginBottom: spacing.sm,
   },
   deleteButton: {

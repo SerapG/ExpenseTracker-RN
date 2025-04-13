@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   },
   title: {
     ...typography.heading,
-    color: colors.text,
+    color: colors.titletext,
     marginBottom: spacing.xs,
   },
   smallTitle: {
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   },
   amount: {
     ...typography.body,
-    color: colors.primary,
+    color: colors.titletext,
   },
   date: {
     ...typography.small,

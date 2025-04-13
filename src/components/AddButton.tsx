@@ -4,13 +4,16 @@ import colors from '../theme/colors';
 import spacing from '../theme/spacing';
 import typography from '../theme/typography';
 
+
+// Bileşen tipi: dışarıdan title ve onPress fonksiyonu alır
 type Props = {
-  title: string;
-  onPress: () => void;
+  title: string;  // Butonun üstünde gösterilecek yazı
+  onPress: () => void; // Butona tıklanınca çalışacak fonksiyon
 };
 
 const AddButton = ({ title, onPress }: Props) => {
   return (
+    // Buton görünümünde dokunulabilir alan
     <TouchableOpacity style={styles.button} onPress={onPress}>
       <Text style={styles.text}>{title}</Text>
     </TouchableOpacity>

@@ -1,44 +1,59 @@
-import React from 'react';
-import { View, Text, StyleSheet, FlatList } from 'react-native';
-import { useRoute, RouteProp } from '@react-navigation/native';
+import React, { useEffect, useState } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+} from 'react-native';
+import { useRoute, RouteProp, useNavigation } from '@react-navigation/native';
 import type { RootStackParamList } from '../../navigation/StackNavigator';
-import { dummyExpenses } from '../../data/expenses';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
+import { Expense, dummyExpenses } from '../../data/expenses';
+import ExpenseItem from '../../components/ExpenseItem';
 import BackToHomeButton from '../../components/BackToHomeButton';
-import colors from '../../theme/colors';
 
+import colors from '../../theme/colors';
+import spacing from '../../theme/spacing';
+import typography from '../../theme/typography';
 
 const CategoryDetailScreen = () => {
   const route = useRoute<RouteProp<RootStackParamList, 'CategoryDetail'>>();
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { category } = route.params;
 
-  const filteredExpenses = dummyExpenses.filter(
-    (expense) => expense.category.toLowerCase() === category.toLowerCase()
-  );
+  // Seçilen kategoriye ait harcamaları tutan local state
+  const [filteredExpenses, setFilteredExpenses] = useState<Expense[]>([]);
+
+  // Sayfa yüklendiğinde sadece ilgili kategoriye ait harcamaları filtrele
+  useEffect(() => {
+    const filtered = dummyExpenses.filter((expense) => expense.category === category);
+    setFilteredExpenses(filtered);
+  }, [category]);
+
+  // Harcamayı siler ve state'i günceller
+  const handleDelete = (id: string) => {
+    setFilteredExpenses((prev) => prev.filter((item) => item.id !== id));
+  };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{category} kategorisine ait harcamalar</Text>
+      {/* Sayfa başlığı */}
+      <Text style={styles.title}>Category: {category}</Text>
 
-      {filteredExpenses.length === 0 ? (
-        <Text style={styles.emptyText}>Bu kategoriye ait harcama bulunamadı.</Text>
-      ) : (
-        <FlatList
-          data={filteredExpenses}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <View style={styles.expenseItem}>
-              <Text style={styles.expenseTitle}>{item.title}</Text>
-              <Text style={styles.expenseDetail}>
-                {item.amount} TL - {item.date}
-              </Text>
-            </View>
-          )}
-        />
-      )}
-
-      <BackToHomeButton />
-
+      {/* Kategoriye ait harcamaların listesi */}
+      <FlatList
+        data={filteredExpenses}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <ExpenseItem
+            {...item}
+            onPress={() => navigation.navigate('ExpenseDetail', { expense: item })} // Detaya yönlendir
+            onDelete={() => handleDelete(item.id)} // Harcamayı sil
+          />
+        )}
+        ListFooterComponent={<BackToHomeButton />} // En altta "Ana Sayfa" butonu
+      />
     </View>
   );
 };
@@ -47,32 +62,13 @@ export default CategoryDetailScreen;
 
 const styles = StyleSheet.create({
   container: {
-    padding: 16,
+    padding: spacing.md,
+    backgroundColor: colors.background,
+    flex: 1,
   },
   title: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 12,
-    color:colors.titletext,
-  },
-  expenseItem: {
-    backgroundColor: '#f1f1f1',
-    padding: 10,
-    borderRadius: 8,
-    marginBottom: 8,
-  },
-  expenseTitle: {
-    fontSize: 16,
-    fontWeight: '600',
-    color:colors.brown,
-  },
-  expenseDetail: {
-    fontSize: 14,
-    color: colors.danger,
-  },
-  emptyText: {
-    marginTop: 20,
-    fontStyle: 'italic',
-    color: '#888',
+    ...typography.heading,
+    color: colors.titletext,
+    marginBottom: spacing.md,
   },
 });

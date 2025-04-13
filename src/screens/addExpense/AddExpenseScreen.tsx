@@ -21,6 +21,7 @@ import typography from '../../theme/typography';
 const AddExpenseScreen = () => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
+  // Form alanlarını tutan state
   const [form, setForm] = useState({
     title: '',
     amount: '',
@@ -28,16 +29,20 @@ const AddExpenseScreen = () => {
     category: '',
   });
 
+  // Formdaki alanlarda değişiklik olduğunda state'i günceller
   const handleChange = (key: string, value: string) => {
     setForm({ ...form, [key]: value });
   };
 
+   // Form gönderildiğinde yapılacak işlemler
   const handleSubmit = () => {
+     // Tüm alanlar dolu değilse uyarı göster
     if (!form.title || !form.amount || !form.date || !form.category) {
       Alert.alert('Warning', 'Please fill in all fields!');
       return;
     }
 
+    // Yeni harcama objesi oluştur
     const newExpense = {
       id: Date.now().toString(),
       title: form.title,
@@ -46,6 +51,7 @@ const AddExpenseScreen = () => {
       category: form.category,
     };
 
+    // Ana ekrana gideri gönder ve geri dön
     navigation.navigate('Home', { newExpense });
   };
 

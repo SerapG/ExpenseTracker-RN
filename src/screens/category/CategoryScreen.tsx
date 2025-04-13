@@ -5,8 +5,7 @@ import {
   TextInput,
   FlatList,
   StyleSheet,
-  Alert,
-  TouchableOpacity,
+  Alert
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -14,6 +13,8 @@ import type { RootStackParamList } from '../../navigation/StackNavigator';
 
 import AddButton from '../../components/AddButton';
 import BackToHomeButton from '../../components/BackToHomeButton';
+import CategoryItem from '../../components/CategoryItem';
+
 
 import colors from '../../theme/colors';
 import spacing from '../../theme/spacing';
@@ -24,16 +25,20 @@ const CategoryScreen = () => {
   const [newCategory, setNewCategory] = useState('');
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
+  // Yeni kategori ekleme işlemi
   const handleAddCategory = () => {
     const trimmed = newCategory.trim();
+    // Boş kategori girilmesini engelle
     if (!trimmed) {
-      Alert.alert('Uyarı', 'Kategori boş olamaz!');
+      Alert.alert('Warning', 'Category cannot be empty!');
       return;
     }
+    // Aynı kategori zaten varsa ekleme
     if (categories.includes(trimmed)) {
-      Alert.alert('Uyarı', 'Bu kategori zaten var!');
+      Alert.alert('Warning', 'This category already exists!');
       return;
     }
+    // Yeni kategoriyi listeye ekle
     setCategories((prev) => [...prev, trimmed]);
     setNewCategory('');
   };
@@ -60,11 +65,9 @@ const CategoryScreen = () => {
         data={categories}
         keyExtractor={(item) => item}
         renderItem={({ item }) => (
-          <TouchableOpacity style={styles.item} onPress={() => handleCategoryPress(item)}>
-            <Text style={styles.itemText}>{item}</Text>
-          </TouchableOpacity>
-        )}
-      />
+          <CategoryItem title={item}
+          onPress={() => handleCategoryPress(item)}/>
+        )}/>
 
       <BackToHomeButton />
     </View>

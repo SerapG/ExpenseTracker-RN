@@ -2,11 +2,12 @@ import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 
 type DeleteButtonProps = {
-  onPress: () => void;
+  onPress: () => void; // Butona tıklanınca çağrılacak fonksiyon (örneğin silme işlemi)
 };
 
 const DeleteButton = ({ onPress }: DeleteButtonProps) => {
   return (
+    // Dokunulabilir küçük bir buton, ikon içeriyor
     <TouchableOpacity style={styles.button} onPress={onPress}>
       <Text style={styles.text}>Delete</Text>
     </TouchableOpacity>

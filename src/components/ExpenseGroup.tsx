@@ -7,10 +7,10 @@ import spacing from '../theme/spacing';
 import typography from '../theme/typography';
 
 type Props = {
-  category: string;
-  expenses: Expense[];
-  onPressItem: (expense: Expense) => void;
-  onDeleteItem: (id: string) => void;
+  category: string; // kategori adı (ör: "Market")
+  expenses: Expense[]; // o kategoriye ait harcama listesi
+  onPressItem: (expense: Expense) => void; // kart tıklandığında yapılacak işlem (detay sayfasına yönlendirir)
+  onDeleteItem: (id: string) => void; // sil butonuna basıldığında yapılacak işlem
 };
 
 const ExpenseGroup = ({ category, expenses, onPressItem, onDeleteItem }: Props) => {

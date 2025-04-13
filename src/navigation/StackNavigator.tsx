@@ -6,6 +6,7 @@ import ExpenseDetailScreen from '../screens/expenseDetail/ExpenseDetailScreen';
 import CategoryScreen from '../screens/category/CategoryScreen';
 import CategoryDetailScreen from '../screens/categoryDetail/CategoryDetailScreen';
 import type { Expense } from '../data/expenses';
+import colors from '../theme/colors';
 
 
 // Tüm ekranların navigation parametrelerini tanımlar
@@ -21,12 +22,17 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const StackNavigator = () => {
   return (
-    <Stack.Navigator initialRouteName="Home">
-      <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="AddExpense" component={AddExpense} />
+    <Stack.Navigator initialRouteName="Home"
+    screenOptions={{
+        headerShown: true,
+        headerTitleAlign: 'center',
+        headerTintColor: colors.titletext,
+      }}>
+      <Stack.Screen name="Home" component={Home}/>
+      <Stack.Screen name="AddExpense" component={AddExpense}/>
       <Stack.Screen name="ExpenseDetail" component={ExpenseDetailScreen} />
       <Stack.Screen name="Category" component={CategoryScreen} />
-      <Stack.Screen name="CategoryDetail" component={CategoryDetailScreen} />
+      <Stack.Screen name="CategoryDetail" component={CategoryDetailScreen}/>
     </Stack.Navigator>
   );
 };

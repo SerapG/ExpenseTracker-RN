@@ -4,6 +4,7 @@ import Home from '../screens/home/HomeScreen';
 import AddExpense from '../screens/addExpense/AddExpenseScreen';
 import ExpenseDetailScreen from '../screens/expenseDetail/ExpenseDetailScreen';
 import CategoryScreen from '../screens/category/CategoryScreen';
+import CategoryDetailScreen from '../../CategoryDetail';
 import type { Expense } from '../data/expenses';
 import colors from '../theme/colors';
 

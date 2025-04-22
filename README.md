@@ -80,4 +80,4 @@ Page titles are centered and styled.
 
 🧑‍💻 Author
 
-Made by Serap Gülgen
+Made by Serap Gülgen 1.0.0
